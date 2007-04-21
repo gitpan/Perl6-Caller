@@ -1,14 +1,13 @@
-package _caller;
+package Perl6::Caller;
 
 use warnings;
 use strict;
 
-$Perl6::Caller::VERSION = '0.03';
-$_caller::VERSION = '0.03';
+$Perl6::Caller::VERSION = '0.04';
 
 use overload '""' => \&package, fallback => 1;
 
-sub Perl6::Caller::import {
+sub import {
     my ($class) = @_;
     my $callpack = caller;
     no strict 'refs';
@@ -38,27 +37,12 @@ BEGIN {
     }
 }
 
-sub Perl6::Caller::new {
-    my ( $class, $frame ) = @_;
-    _caller::caller->new($frame);
-};
-
 sub new {
     my $class = shift;
-    my $frame = shift || 0;
-    if ( 'Perl6::Caller' eq $class ) {
+    my $frame = @_ ? (shift || 0) : -1;
+    $frame += 2;
 
-        # they called Perl6::Caller->new
-        $class = '_caller';
-    }
-    else {
-
-        # they called caller($optional_frame)->$some_method
-        # or caller in scalar context
-        $frame += 2;
-    }
-
-    my $self = bless {} => '_caller';
+    my $self = bless {} => __PACKAGE__;
     my @caller = CORE::caller($frame);
     return @caller if CORE::wantarray;
     @$self{@methods} = @caller;
@@ -75,7 +59,7 @@ Perl6::Caller - OO C<caller()> interface
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
@@ -195,11 +179,6 @@ anything else.
 internal use only and should not be relied upon.  Further, the bitmask caused
 strange test failures, so I opted not to include them.
 
-=item * C<caller> package
-
-To make this work, we actually use the 'caller' package in addition to the
-C<Perl6::Caller> package.
-
 =item * Subclassing
 
 Don't.
@@ -234,6 +213,10 @@ It's difficult to avoid since the stack frame changes.
 =head1 AUTHOR
 
 Curtis "Ovid" Poe, C<< <ovid@cpan.org> >>
+
+=head1 ACKNOWLEDGEMENTS
+
+Thanks to C<phaylon> for helping me revisit a bad design issue with this.
 
 =head1 BUGS
 

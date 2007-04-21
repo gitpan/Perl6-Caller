@@ -1,6 +1,6 @@
 ---
 name: Perl6-Caller
-version: 0.03
+version: 0.04
 author:
   - 'Curtis "Ovid" Poe <ovid@cpan.org>'
 abstract: OO C<caller()> interface
@@ -12,7 +12,7 @@ requires:
 provides:
   Perl6::Caller:
     file: lib/Perl6/Caller.pm
-    version: 0.03
+    version: 0.04
 generated_by: Module::Build version 0.2805
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

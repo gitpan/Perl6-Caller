@@ -1,5 +1,10 @@
 Revision history for Perl6-Caller
 
+0.02    April 21, 2007
+        - First public release.
+        - I lied.  This is the second public release, but I fixed a few doc
+          nits.
+
 0.01    Date/time
         First version, released on an unsuspecting world.
 

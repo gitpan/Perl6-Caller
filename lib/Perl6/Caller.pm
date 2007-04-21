@@ -3,8 +3,8 @@ package caller;
 use warnings;
 use strict;
 
-$Perl6::Caller::VERSION = '0.01';
-$caller::VERSION = '0.01';
+$Perl6::Caller::VERSION = '0.02';
+$caller::VERSION = '0.02';
 
 use overload '""' => \&package, fallback => 1;
 
@@ -75,7 +75,7 @@ Perl6::Caller - OO C<caller()> interface
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
@@ -92,7 +92,7 @@ Version 0.01
 =head1 C<caller>
 
  # standard usage
- print "In ",           caller->sub,
+ print "In ",           caller->subroutine,
        " called from ", caller->file,
        " line ",        caller->line;
 
@@ -191,9 +191,9 @@ anything else.
 
 =item * C<$hints>, C<$bitmask>
 
-'hints' and 'bitmask' are not available.  They are documented to not be for
-internal use only and should not be relied upon.  Further, the bitmask
-caused strange test failures, so I opted not to include them.
+'hints' and 'bitmask' are not available.  They are documented to be for
+internal use only and should not be relied upon.  Further, the bitmask caused
+strange test failures, so I opted not to include them.
 
 =item * C<caller> package
 
@@ -227,7 +227,7 @@ original C<caller> behavior.
 In list context, we simply default to the original behavior of
 C<CORE::caller>.  However, this I<always> assumes we've called caller with an
 argument.  Calling C<caller> and C<caller(0)> are identical with this module.
-It's impossible to avoid since the stack frame changes.
+It's difficult to avoid since the stack frame changes.
 
 =back
 

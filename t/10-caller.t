@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';    # tests => 1;
+use Test::More tests => 92;
 
 use lib 'lib';
 use Perl6::Caller;
@@ -18,7 +18,7 @@ foreach my $i ( 0 .. $#methods ) {
 
 can_ok 'Perl6::Caller', 'new';
 my $caller = Perl6::Caller->new;
-isa_ok $caller, 'caller',
+isa_ok $caller, '_caller',
   '... and the object it returns';
 
 is $caller->package, undef,
@@ -27,7 +27,7 @@ is $caller->package, scalar CORE::caller,
   '... and match what CORE::caller says';
 
 $caller = caller;
-isa_ok $caller, 'caller',
+isa_ok $caller, '_caller',
   '... and the object it returns';
 
 is $caller->package, undef,
@@ -72,7 +72,7 @@ sub run_frame1_tests {
 
 sub run_frame2_tests {
 my $caller = Perl6::Caller->new;
-isa_ok $caller, 'caller',
+isa_ok $caller, '_caller',
   '... and the object it returns';
 
 is $caller->package, 'Frame2',
@@ -81,7 +81,7 @@ is $caller->package, scalar CORE::caller,
   '... and match what CORE::caller says';
 
 $caller = caller;
-isa_ok $caller, 'caller',
+isa_ok $caller, '_caller',
   '... and the object it returns';
 
 is $caller->package, 'Frame2',

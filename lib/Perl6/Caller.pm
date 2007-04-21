@@ -1,10 +1,10 @@
-package caller;
+package _caller;
 
 use warnings;
 use strict;
 
-$Perl6::Caller::VERSION = '0.02';
-$caller::VERSION = '0.02';
+$Perl6::Caller::VERSION = '0.03';
+$_caller::VERSION = '0.03';
 
 use overload '""' => \&package, fallback => 1;
 
@@ -40,7 +40,7 @@ BEGIN {
 
 sub Perl6::Caller::new {
     my ( $class, $frame ) = @_;
-    caller::caller->new($frame);
+    _caller::caller->new($frame);
 };
 
 sub new {
@@ -49,7 +49,7 @@ sub new {
     if ( 'Perl6::Caller' eq $class ) {
 
         # they called Perl6::Caller->new
-        $class = 'caller';
+        $class = '_caller';
     }
     else {
 
@@ -58,7 +58,7 @@ sub new {
         $frame += 2;
     }
 
-    my $self = bless {} => 'caller';
+    my $self = bless {} => '_caller';
     my @caller = CORE::caller($frame);
     return @caller if CORE::wantarray;
     @$self{@methods} = @caller;
@@ -75,7 +75,7 @@ Perl6::Caller - OO C<caller()> interface
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 

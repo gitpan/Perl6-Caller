@@ -3,7 +3,8 @@ package Perl6::Caller;
 use warnings;
 use strict;
 
-$Perl6::Caller::VERSION = '0.04';
+our $VERSION = '0.100';
+$VERSION = eval $VERSION;
 
 use overload '""' => \&package, fallback => 1;
 
